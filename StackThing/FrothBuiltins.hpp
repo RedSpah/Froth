@@ -11,73 +11,73 @@
 
 namespace froth
 {
-	namespace builtins_impl
-	{
-		BUILTIN_DEF(EVAL_N);
-		BUILTIN_DEF(FSIZE);
-		BUILTIN_DEF(UNPACK);
+    namespace builtins_impl
+    {
+        BUILTIN_DEF(EVAL_N);
+        BUILTIN_DEF(FSIZE);
+        BUILTIN_DEF(UNPACK);
 
         BUILTIN_DEF(NOP) {}
 
 
 
-		BUILTIN_DEF(PLUS) {
-			val a = pop(execution_stack), b = pop(execution_stack);
+        BUILTIN_DEF(PLUS) {
+            val a = pop(execution_stack), b = pop(execution_stack);
 
-			if (is_int(a) && is_int(b)) 
+            if (is_int(a) && is_int(b)) 
             {
                 execution_stack.push(get_int(a, execution_stack) + get_int(b, execution_stack)); 
             }
-			else 
+            else 
             { 
                 execution_stack.push(get_real(a, execution_stack) + get_real(b, execution_stack)); 
             }
-		}
+        }
 
-		BUILTIN_DEF(MINUS) {
-			val a = pop(execution_stack), b = pop(execution_stack);
+        BUILTIN_DEF(MINUS) {
+            val a = pop(execution_stack), b = pop(execution_stack);
 
-			if (is_int(a) && is_int(b)) 
+            if (is_int(a) && is_int(b)) 
             { 
                 execution_stack.push(get_int(b, execution_stack) + get_int(a, execution_stack)); 
             }
-			else 
+            else 
             { 
                 execution_stack.push(get_real(b, execution_stack) + get_real(a, execution_stack)); 
             }
-		}
+        }
 
-		BUILTIN_DEF(MUL) {
-			val a = pop(execution_stack), b = pop(execution_stack);
+        BUILTIN_DEF(MUL) {
+            val a = pop(execution_stack), b = pop(execution_stack);
 
-			if (is_int(a) && is_int(b)) 
+            if (is_int(a) && is_int(b)) 
             { 
                 execution_stack.push(get_int(b, execution_stack) * get_int(a, execution_stack)); 
             }
-			else 
+            else 
             { 
                 execution_stack.push(get_real(b, execution_stack) * get_real(a, execution_stack)); 
             }
-		}
+        }
 
-		BUILTIN_DEF(DIV) {
-			val a = pop(execution_stack), b = pop(execution_stack);
+        BUILTIN_DEF(DIV) {
+            val a = pop(execution_stack), b = pop(execution_stack);
 
-			execution_stack.push(get_real(b, execution_stack) / get_real(a, execution_stack));
-		}
+            execution_stack.push(get_real(b, execution_stack) / get_real(a, execution_stack));
+        }
 
-		BUILTIN_DEF(MOD) {
-			val a = pop(execution_stack), b = pop(execution_stack);
+        BUILTIN_DEF(MOD) {
+            val a = pop(execution_stack), b = pop(execution_stack);
 
-			execution_stack.push(get_int(b, execution_stack) % get_int(a, execution_stack));
-		}
+            execution_stack.push(get_int(b, execution_stack) % get_int(a, execution_stack));
+        }
 
 
 
-		BUILTIN_DEF(LESS) {
-			val a = pop(execution_stack), b = pop(execution_stack);
+        BUILTIN_DEF(LESS) {
+            val a = pop(execution_stack), b = pop(execution_stack);
 
-			if (is_int(a) && is_int(b)) 
+            if (is_int(a) && is_int(b)) 
             { 
                 execution_stack.push(static_cast<int64_t>(get_int(a, execution_stack) < get_int(b, execution_stack))); 
             }
@@ -85,16 +85,16 @@ namespace froth
             {
                 execution_stack.push(static_cast<int64_t>(get_string(a, execution_stack) < get_string(b, execution_stack)));
             }
-			else 
+            else 
             { 
                 execution_stack.push(static_cast<int64_t>(get_real(a, execution_stack) < get_real(b, execution_stack))); 
             }
-		}
+        }
 
-		BUILTIN_DEF(GREATER) {
-			val a = pop(execution_stack), b = pop(execution_stack);
+        BUILTIN_DEF(GREATER) {
+            val a = pop(execution_stack), b = pop(execution_stack);
 
-			if (is_int(a) && is_int(b)) 
+            if (is_int(a) && is_int(b)) 
             { 
                 execution_stack.push(static_cast<int64_t>(get_int(a, execution_stack) > get_int(b, execution_stack))); 
             }
@@ -102,14 +102,14 @@ namespace froth
             {
                 execution_stack.push(static_cast<int64_t>(get_string(a, execution_stack) > get_string(b, execution_stack)));
             }
-			else 
+            else 
             { 
                 execution_stack.push(static_cast<int64_t>(get_real(a, execution_stack) > get_real(b, execution_stack))); 
             }
-		}
+        }
 
-		BUILTIN_DEF(EQUAL) {
-			val a = pop(execution_stack), b = pop(execution_stack);
+        BUILTIN_DEF(EQUAL) {
+            val a = pop(execution_stack), b = pop(execution_stack);
 
             if (is_int(a) && is_int(b))
             {
@@ -129,8 +129,8 @@ namespace froth
             }
         }
 
-		BUILTIN_DEF(LESS_EQ) {
-			val a = pop(execution_stack), b = pop(execution_stack);
+        BUILTIN_DEF(LESS_EQ) {
+            val a = pop(execution_stack), b = pop(execution_stack);
 
             if (is_int(a) && is_int(b))
             {
@@ -146,8 +146,8 @@ namespace froth
             }
         }
 
-		BUILTIN_DEF(GREATER_EQ) {
-			val a = pop(execution_stack), b = pop(execution_stack);
+        BUILTIN_DEF(GREATER_EQ) {
+            val a = pop(execution_stack), b = pop(execution_stack);
 
             if (is_int(a) && is_int(b))
             {
@@ -163,8 +163,8 @@ namespace froth
             }
         }
 
-		BUILTIN_DEF(NOT_EQ) {
-			val a = pop(execution_stack), b = pop(execution_stack);
+        BUILTIN_DEF(NOT_EQ) {
+            val a = pop(execution_stack), b = pop(execution_stack);
 
             if (is_int(a) && is_int(b))
             {
@@ -186,23 +186,23 @@ namespace froth
 
 
 
-		BUILTIN_DEF(AND) {
-			val a = pop(execution_stack), b = pop(execution_stack);
+        BUILTIN_DEF(AND) {
+            val a = pop(execution_stack), b = pop(execution_stack);
 
-			execution_stack.push(static_cast<int64_t>(get_bool(a) && get_bool(b)));
-		}
+            execution_stack.push(static_cast<int64_t>(get_bool(a) && get_bool(b)));
+        }
 
-		BUILTIN_DEF(OR) {
-			val a = pop(execution_stack), b = pop(execution_stack);
+        BUILTIN_DEF(OR) {
+            val a = pop(execution_stack), b = pop(execution_stack);
 
-			execution_stack.push(static_cast<int64_t>(get_bool(a) || get_bool(b)));
-		}
+            execution_stack.push(static_cast<int64_t>(get_bool(a) || get_bool(b)));
+        }
 
-		BUILTIN_DEF(NOT) {
-			val a = pop(execution_stack);
+        BUILTIN_DEF(NOT) {
+            val a = pop(execution_stack);
 
-			execution_stack.push(static_cast<int64_t>(!get_bool(a)));
-		}
+            execution_stack.push(static_cast<int64_t>(!get_bool(a)));
+        }
 
 
 
@@ -228,9 +228,9 @@ namespace froth
 
 
 
-		BUILTIN_DEF(POP) {
-			pop(execution_stack);
-		}
+        BUILTIN_DEF(POP) {
+            pop(execution_stack);
+        }
 
         BUILTIN_DEF(POP_N) {
             int64_t n = get_int(pop(execution_stack), execution_stack);
@@ -243,12 +243,12 @@ namespace froth
 
 
 
-		BUILTIN_DEF(SWAP) {
-			val a = pop(execution_stack), b = pop(execution_stack);
+        BUILTIN_DEF(SWAP) {
+            val a = pop(execution_stack), b = pop(execution_stack);
 
-			execution_stack.push(a);
-			execution_stack.push(b);
-		}
+            execution_stack.push(a);
+            execution_stack.push(b);
+        }
 
         BUILTIN_DEF(FLIP_N) {
             int64_t n = get_int(pop(execution_stack), execution_stack);
@@ -338,60 +338,60 @@ namespace froth
 
 
 
-		BUILTIN_DEF(CONDITIONAL) {
-			val a = pop(execution_stack), b = pop(execution_stack), c = pop(execution_stack);
+        BUILTIN_DEF(CONDITIONAL) {
+            val a = pop(execution_stack), b = pop(execution_stack), c = pop(execution_stack);
 
-			if (get_bool(a)) { execution_stack.push(b); } else { execution_stack.push(c); }			
-		}
+            if (get_bool(a)) { execution_stack.push(b); } else { execution_stack.push(c); }			
+        }
 
-		
+        
 
-		BUILTIN_DEF(INVOKE) {
-			val invoked_val = pop(execution_stack);
-			std::string func_name = get_string(invoked_val, execution_stack);
+        BUILTIN_DEF(INVOKE) {
+            val invoked_val = pop(execution_stack);
+            std::string func_name = get_string(invoked_val, execution_stack);
 
-			if (funcs[func_name].size() == 0)
-			{ 
-				if (is_command(invoked_val))
-				{
-					builtin invoked_builtin = get_command(invoked_val, execution_stack);
-					auto builtin_iter = std::find_if(builtins_begin(), builtins_end(), [&invoked_builtin](auto& v) {return std::get<0>(v) == invoked_builtin; });
-					if (builtin_iter != builtins_end())
-					{
-						if (std::get<0>(*builtin_iter) == FEND) 
-						{ 
-							execution_stack.push(invoked_val); 
-							BUILTIN_FUNC(FSIZE)(execution_stack, instruction_queue); 
-							int64_t n = get_int(pop(execution_stack), execution_stack);
-							BUILTIN_FUNC(UNPACK)(execution_stack, instruction_queue); 
-							execution_stack.push(n - 2); 
-							BUILTIN_FUNC(EVAL_N)(execution_stack, instruction_queue); 
-						}
-						else std::get<2>(*builtin_iter)(execution_stack, instruction_queue); 
-					}
-					else execution_stack.push(error(std::string("BuiltinError: Unimplemented builtin.")));
-				}
-				else execution_stack.push(invoked_val);				
-			}
-			else
-			{
-				queue cur_instruction_queue = instruction_queue;
-				queue new_instruction_queue;
-				list func_body = funcs[func_name];
+            if (funcs[func_name].size() == 0)
+            { 
+                if (is_command(invoked_val))
+                {
+                    builtin invoked_builtin = get_command(invoked_val, execution_stack);
+                    auto builtin_iter = std::find_if(builtins_begin(), builtins_end(), [&invoked_builtin](auto& v) {return std::get<0>(v) == invoked_builtin; });
+                    if (builtin_iter != builtins_end())
+                    {
+                        if (std::get<0>(*builtin_iter) == FEND) 
+                        { 
+                            execution_stack.push(invoked_val); 
+                            BUILTIN_FUNC(FSIZE)(execution_stack, instruction_queue); 
+                            int64_t n = get_int(pop(execution_stack), execution_stack);
+                            BUILTIN_FUNC(UNPACK)(execution_stack, instruction_queue); 
+                            execution_stack.push(n - 2); 
+                            BUILTIN_FUNC(EVAL_N)(execution_stack, instruction_queue); 
+                        }
+                        else std::get<2>(*builtin_iter)(execution_stack, instruction_queue); 
+                    }
+                    else execution_stack.push(error(std::string("BuiltinError: Unimplemented builtin.")));
+                }
+                else execution_stack.push(invoked_val);				
+            }
+            else
+            {
+                queue cur_instruction_queue = instruction_queue;
+                queue new_instruction_queue;
+                list func_body = funcs[func_name];
 
-				for (val& v : func_body) { new_instruction_queue.push(v); }
-				while (!cur_instruction_queue.empty()) { new_instruction_queue.push(pop(cur_instruction_queue)); }
-				instruction_queue = new_instruction_queue;
-			}
-		}
+                for (val& v : func_body) { new_instruction_queue.push(v); }
+                while (!cur_instruction_queue.empty()) { new_instruction_queue.push(pop(cur_instruction_queue)); }
+                instruction_queue = new_instruction_queue;
+            }
+        }
 
-		BUILTIN_DEF(INVOKE_PRINT_FUNC) {
-			val invoked_val = pop(execution_stack);
-			std::string func_name = get_string(invoked_val, execution_stack);
+        BUILTIN_DEF(INVOKE_PRINT_FUNC) {
+            val invoked_val = pop(execution_stack);
+            std::string func_name = get_string(invoked_val, execution_stack);
 
-			if (funcs[func_name].size() == 0) { execution_stack.push(invoked_val); }
-			else { list func_body = funcs[func_name]; for (val& v : func_body) { execution_stack.push(v); } }
-		}
+            if (funcs[func_name].size() == 0) { execution_stack.push(invoked_val); }
+            else { list func_body = funcs[func_name]; for (val& v : func_body) { execution_stack.push(v); } }
+        }
 
         BUILTIN_DEF(INVOKE_FORCE)
         {
@@ -400,9 +400,9 @@ namespace froth
 
 
 
-		BUILTIN_DEF(FBEGIN) {}
+        BUILTIN_DEF(FBEGIN) {}
 
-		BUILTIN_DEF(FEND) {}
+        BUILTIN_DEF(FEND) {}
 
         BUILTIN_DEF(FSIZE) {
             val sized_val = pop(execution_stack);
@@ -449,22 +449,22 @@ namespace froth
 
 
 
-		BUILTIN_DEF(QUOTE) {
-			execution_stack.push(pop(instruction_queue));
-		}
+        BUILTIN_DEF(QUOTE) {
+            execution_stack.push(pop(instruction_queue));
+        }
 
-		BUILTIN_DEF(CONCAT) {
-			execution_stack.push(get_string(pop(execution_stack), execution_stack) + get_string(pop(execution_stack), execution_stack));
-		}
+        BUILTIN_DEF(CONCAT) {
+            execution_stack.push(get_string(pop(execution_stack), execution_stack) + get_string(pop(execution_stack), execution_stack));
+        }
 
-		
+        
 
         BUILTIN_DEF(DEBUG_PRINT) {
             val v = pop(execution_stack);
             pretty_print_val(v);
         }
 
-		
+        
 
         BUILTIN_DEF(TO_INT) {
             execution_stack.push(get_int(pop(execution_stack), execution_stack));
@@ -486,7 +486,7 @@ namespace froth
             execution_stack.push(static_cast<int64_t>(get_bool(pop(execution_stack))));
         }
 
-		
+        
 
         BUILTIN_DEF(READ_STR) {
             std::cout << "Insert string: ";
@@ -588,33 +588,33 @@ namespace froth
             execution_stack.push(counter++);
         }
 
-	}
+    }
 
-	const std::vector<builtin_definition> builtins
-	{
+    const std::vector<builtin_definition> builtins
+    {
         BUILTIN(NOP, ".|"),
-		BUILTIN(PLUS, "+"),	BUILTIN(MINUS, "-"), BUILTIN(MUL, "*"), BUILTIN(DIV, "/"), BUILTIN(MOD, "%"),
-		BUILTIN(LESS, ">"),	BUILTIN(GREATER, "<"), BUILTIN(EQUAL, "=="), BUILTIN(LESS_EQ, ">="), BUILTIN(GREATER_EQ, "<="), BUILTIN(NOT_EQ, "<>"),
-		BUILTIN(AND, "&&"), BUILTIN(OR, "||"), BUILTIN(NOT, "!"), 
+        BUILTIN(PLUS, "+"),	BUILTIN(MINUS, "-"), BUILTIN(MUL, "*"), BUILTIN(DIV, "/"), BUILTIN(MOD, "%"),
+        BUILTIN(LESS, ">"),	BUILTIN(GREATER, "<"), BUILTIN(EQUAL, "=="), BUILTIN(LESS_EQ, ">="), BUILTIN(GREATER_EQ, "<="), BUILTIN(NOT_EQ, "<>"),
+        BUILTIN(AND, "&&"), BUILTIN(OR, "||"), BUILTIN(NOT, "!"), 
         BUILTIN(DUPE, "&"), BUILTIN(DUPE_N, "&@"), BUILTIN(DUPE_ALL, "&!!"),
-		BUILTIN(POP, "^"), BUILTIN(POP_N, "^@"), BUILTIN(POP_ALL, "^!!"),
+        BUILTIN(POP, "^"), BUILTIN(POP_N, "^@"), BUILTIN(POP_ALL, "^!!"),
         BUILTIN(SWAP, "$"), BUILTIN(FLIP_N, "$@"), BUILTIN(FLIP, "$!!"),
         BUILTIN(EVAL, "#"), BUILTIN(EVAL_N, "#@"), BUILTIN(EVAL_KEEP, "#!!"), 
         BUILTIN(CONDITIONAL, "?:"), 
         BUILTIN(ASSIGN, "="), BUILTIN(IS_DEF, "=?"), BUILTIN(UNDEF, "?"),
         BUILTIN(INVOKE, "`"), BUILTIN(INVOKE_PRINT_FUNC, "`\""), BUILTIN(INVOKE_FORCE, "`!!"),
-		BUILTIN(FBEGIN, "{"), BUILTIN(FEND, "}"), BUILTIN(FSIZE, "@"), BUILTIN(UNPACK, ">/"),
+        BUILTIN(FBEGIN, "{"), BUILTIN(FEND, "}"), BUILTIN(FSIZE, "@"), BUILTIN(UNPACK, ">/"),
         BUILTIN(QUOTE, "\""), BUILTIN(CONCAT, ".."),
         BUILTIN(TO_INT, "_"), BUILTIN(TO_REAL, "_."), BUILTIN(TO_STRING, "_\""), BUILTIN(TO_COM, "_!!"), BUILTIN(TO_BOOL, "_?"),
         BUILTIN(READ_STR, "(~"), BUILTIN(WRITE_STR, ")~"),
         BUILTIN(STRING_GET, "~["), BUILTIN(STRING_SET, "~]"),
         BUILTIN(BITWISE_AND, "/&"), BUILTIN(BITWISE_OR, "/|"), BUILTIN(BITWISE_NOT, "/~"),
         BUILTIN(DIG, "%^"), BUILTIN(BURY, "%|"),
-		BUILTIN(DEBUG_PRINT, "[=]"),
+        BUILTIN(DEBUG_PRINT, "[=]"),
         BUILTIN(GET_TYPE, "*?"),
         BUILTIN(COUNTER, "++")		
-	};
+    };
 
-	std::vector<builtin_definition>::const_iterator builtins_begin() { return builtins.begin(); };
-	std::vector<builtin_definition>::const_iterator builtins_end() { return builtins.end(); };
+    std::vector<builtin_definition>::const_iterator builtins_begin() { return builtins.begin(); };
+    std::vector<builtin_definition>::const_iterator builtins_end() { return builtins.end(); };
 }
