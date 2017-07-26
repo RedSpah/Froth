@@ -9,17 +9,6 @@ int main()
 	stack execution_stack;
 	std::string inp; 
 
-	std::string stdl; 
-	for (auto&& s : froth::stdlib) { stdl += s.second; }
-
-	froth::funcs;
-
-	std::cout << stdl; 
-
-	instruction_queue = full_parse(stdl);
-	eval(execution_stack, instruction_queue); 
-	execution_stack = stack();
-
 	while (1)
 	{
 		std::cout << "Input Froth:\n";
@@ -30,11 +19,6 @@ int main()
 		{ 
 			execution_stack = stack(); 
 			funcs.clear(); 
-			stdl = "";
-			for (auto&& s : froth::stdlib) { stdl += s.second; }
-			instruction_queue = full_parse(stdl);
-			eval(execution_stack, instruction_queue);
-			execution_stack = stack();
 			continue;
 		}
 		instruction_queue = full_parse(inp);

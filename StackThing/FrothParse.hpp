@@ -48,7 +48,7 @@ namespace froth
 			}
 		}
 		else if (error_stream.str() == "") { return parse_stream.str(); }
-		else return error_stream.str();
+		return error_stream.str();
 	}
 
 	void eval(stack& execution_stack, queue& instruction_queue)

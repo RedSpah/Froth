@@ -8,7 +8,7 @@
 #include <unordered_map>
 #include <functional>
 
-using std::string_literals::operator ""s;
+using namespace std::string_literals;
 
 namespace froth
 {
@@ -41,6 +41,7 @@ namespace froth
 		command(builtin c) : com(c) {};
 		command() : com(NOP) {};
 		builtin com;
+        operator builtin() {return com;}
 	};
 
 	struct error
@@ -56,7 +57,7 @@ namespace froth
 	using stack = std::stack<val>;
     using builtin_definition = std::tuple<builtin, const char*, std::function<void(stack&, queue&)>>;
 
-	static const std::unordered_map<std::string, std::string> stdlib
+	/*static const std::unordered_map<std::string, std::string> stdlib
 	{
 		{ "__inc", "{ 0 __intr_ctr __intr_ctr ? ?: ` 1 + __intr_ctr = __intr_ctr ` } __inc = " },
 		{ "inc", "{ 0 __counter __counter ? ?: ` 1 + __counter = __counter ` } inc = " },
@@ -64,7 +65,7 @@ namespace froth
 		{ "succ", "{ 0 __counter __counter ? ?: ` 1 + __counter = } succ = " },
 		{ "res", "{ 0 __counter = } res = " },
 		{ "while", "{ __inc ` __w_cr = __w_check __w_cr ` .. __w_ch = __w_body __w_cr ` .. __w_bd = __w_loop __w_cr ` .. __w_lp = __w_ch ` = __w_lp ` $ \" ` $ __w_bd ` = { __w_bd `!! /\\ __w_ch `!! ` ?: ` } __w_lp ` = __w_lp ` ` } while = "},
-	};
+	};*/
 
 	static std::unordered_map<std::string, std::vector<val>> funcs{};
 

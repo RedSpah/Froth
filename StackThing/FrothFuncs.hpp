@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include "FrothCore.hpp"
+#include "FrothHelper.hpp"
 
 namespace froth
 {
@@ -47,7 +48,7 @@ namespace froth
 	{
 		if (is_real(val)) { return std::to_string(std::get<double>(val)); }
 		else if (is_int(val)) { return std::to_string(std::get<int64_t>(val)); }
-		else if (is_command(val)) { return std::get<1>(*std::find_if(builtins_begin(), builtins_end(), [&val](auto b) {return std::get<0>(b) == std::get<command>(val).com; })); }
+		else if (is_command(val)) { return std::get<1>(*std::find_if(builtins_begin(), builtins_end(), [&val](auto b) {return std::get<0>(b) == std::get<command>(val); })); }
 		else if (is_error(val)) { return std::get<error>(val).what; }
 		else return std::get<std::string>(val);
 	}

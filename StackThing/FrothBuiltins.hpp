@@ -192,7 +192,7 @@ namespace froth
         }     
 
         BUILTIN_DEF(EVAL_N) {
-            int n = get_int(pop(execution_stack), execution_stack);
+            int64_t n = get_int(pop(execution_stack), execution_stack);
             list eval_list;
 
             while (!execution_stack.empty() && n--> 0) { eval_list.push_back(pop(execution_stack)); }
@@ -214,9 +214,9 @@ namespace froth
         BUILTIN_DEF(ASSIGN) {
             std::string fname = get_string(pop(execution_stack), execution_stack);
             val com = pop(execution_stack);
-            command c(NOP);
+            builtin c = NOP;
 
-            if (is_command(com) && (c = get_command(com, execution_stack), c.com == FEND))
+            if (is_command(com) && (c = get_command(com, execution_stack), c == FEND))
             {
                 int indend = 1;
                 list func_body;
@@ -227,8 +227,8 @@ namespace froth
                     if (is_command(com))
                     {
                         c = get_command(com, execution_stack);
-                        if (c.com == FBEGIN) { indend--; }
-                        if (c.com == FEND) { indend++; }
+                        if (c == FBEGIN) { indend--; }
+                        if (c == FEND) { indend++; }
                     }
                 }
 
@@ -270,8 +270,8 @@ namespace froth
 			{ 
 				if (is_command(name))
 				{
-					command c = get_command(name, execution_stack);
-					auto builtin_iter = std::find_if(builtins_begin(), builtins_end(), [&c](auto& v) {return std::get<0>(v) == c.com; });
+					builtin c = get_command(name, execution_stack);
+					auto builtin_iter = std::find_if(builtins_begin(), builtins_end(), [&c](auto& v) {return std::get<0>(v) == c; });
 					if (builtin_iter != builtins_end())
 					{
 						if (std::get<0>(*builtin_iter) == FEND) 
@@ -321,8 +321,8 @@ namespace froth
             {
                 if (is_command(name))
                 {
-                    command c = get_command(name, execution_stack);
-                    auto builtin_iter = std::find_if(builtins_begin(), builtins_end(), [&c](auto& v) {return std::get<0>(v) == c.com; });
+                    builtin c = get_command(name, execution_stack);
+                    auto builtin_iter = std::find_if(builtins_begin(), builtins_end(), [&c](auto& v) {return std::get<0>(v) == c; });
                     if (builtin_iter != builtins_end())
                     {
                         if (std::get<0>(*builtin_iter) == FEND)
@@ -355,21 +355,22 @@ namespace froth
 
 
             val com = pop(execution_stack);
-            command c(NOP);
+            builtin c;
 
-            if (is_command(com) && (c = get_command(com, execution_stack), c.com == FEND))
+            if (is_command(com) && (c = get_command(com, execution_stack), c == FEND))
             {
                 int indend = 1;
                 list func_body{ com };
                 while (indend > 0 && !is_error(com))
                 {
+                    
                     com = pop(execution_stack);
                     func_body.push_back(com);
                     if (is_command(com))
                     {
                         c = get_command(com, execution_stack);
-                        if (c.com == FBEGIN) { indend--; }
-                        if (c.com == FEND) { indend++; }
+                        if (c == FBEGIN) { indend--; }
+                        if (c == FEND) { indend++; }
                     }
                 }
 
@@ -458,7 +459,7 @@ namespace froth
             std::string str = get_string(pop(execution_stack), execution_stack);
             int64_t n = get_int(pop(execution_stack), execution_stack);
 
-            if (n >= str.size()) {execution_stack.push(error("StringError: Trying to access a string out of bounds."s));}
+            if (n >= static_cast<int64_t>(str.size())) {execution_stack.push(error("StringError: Trying to access a string out of bounds."s));}
             else {char c = str[n]; str.clear(); str += c; execution_stack.push(str); }
         }
 
@@ -467,12 +468,12 @@ namespace froth
             int64_t n = get_int(pop(execution_stack), execution_stack);
             std::string rep = get_string(pop(execution_stack), execution_stack);
 
-            if (n >= str.size()) { execution_stack.push(error("StringError: Trying to access a string out of bounds."s)); }
+            if (n >= static_cast<int64_t>(str.size())) { execution_stack.push(error("StringError: Trying to access a string out of bounds."s)); }
             else 
             {
                 str.erase(str.begin() + n, str.begin() + n + 1); 
                 std::copy(str.begin() + n, str.end(), std::back_inserter(rep)); 
-                str.erase(str.begin() + n, str.end); 
+                str.erase(str.begin() + n, str.end()); 
                 std::copy(rep.begin(), rep.end(), std::back_inserter(str)); 
                 execution_stack.push(str);
             }
